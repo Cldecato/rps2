@@ -2,9 +2,12 @@ $(document).ready(function() {
     var wins = 0;
     var losses = 0;
     var ties = 0;
-    var username = "";
-    var userGuess = 'rock';
-    // var user2Guess = 'paper';
+    var username = '';
+    var userGuess = '';
+    var turnCounter = 0;
+    var clickCounter = 0;
+    var userChatInput = '';
+
 
     var config = {
         apiKey: "AIzaSyDrRos3pvaMEm_n-vRHZ4mpIm37cQIjk3U",
@@ -16,20 +19,45 @@ $(document).ready(function() {
     };
     firebase.initializeApp(config);
     var database = firebase.database();
-
-    $("#start").on("click", function(event) {
-        event.preventDefault();
-        var user = $("#username").val().trim();
-        $("#user1").text(user);
-        $("#name-input").empty();
-        $("#name-input").text("Welcome " + user + " you are Player 1");
-        database.ref().set({
-            name: user,
+    var gameState = {
+        user1: {
+            name: username,
             wins: wins,
             losses: losses,
             ties: ties,
             guess: userGuess
-        });
+        },
+        user2: { 
+            name: username,
+            wins: wins,
+            losses: losses,
+            ties: ties,
+            guess: userGuess
+        },
+        turn: turnCounter,
+        chat: userChatInput
+    }
+    localStorage.clear();
+
+    database.ref().on("value", function(snapshot) {
+        snap = snapshot.val();
+        $("#user1").text(snap.user1.name);
+        $("#user2").text(snap.user2.name);
+    })
+
+    $("#start").on("click", function(event) {
+        event.preventDefault();
+        var user = $("#username").val().trim();
+        clickCounter++;
+        if ( clickCounter == 2) {
+            localStorage.setItem('user2', user);
+            gameState.user2.name = localStorage.getItem('user2');
+            database.ref().set(gameState);
+        } else if ( clickCounter == 1) {
+            localStorage.setItem('user1', user);
+            gameState.user1.name = localStorage.getItem('user1');
+            database.ref().set(gameState);
+        }      
     })
 
     $("#send").on("click", function(event) {
@@ -37,6 +65,8 @@ $(document).ready(function() {
         var message = $("#chat").val().trim();
         $("#chat-box").append(message);
     })
+
+    
 
 
     //  Game Logic Here
