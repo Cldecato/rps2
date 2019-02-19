@@ -14,82 +14,87 @@
         <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
         <script src="assets/javascript/game.js" type="text/javascript"></script>
     </head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="jumbotron">
-                    <h1>
-                        Rock Paper Scissors Multiplayer
-                    </h1>                   
-                </div>
-            </div>
-        </div>
-        <div class="row" id="name-input">
-            <div class="col-md-6">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Name" id="username">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button" id="start">Start</button>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card card-default">
-                    <div class="card-header">
-                        <p id="user1">Waiting for Player 1</p>
-                    </div>
-                    <div class="card-body choices">
-                        <p class="rock">Rock</p>
-                        <p class="paper">Paper</p>
-                        <p class="scissors">Scissors</p>
-                    </div>
-                    <div>
-                        <p id="user1wl">Wins: Losses:</p>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="jumbotron">
+                        <h1>
+                            <center>
+                                Rock Paper Scissors Multiplayer
+                            </center>
+                        </h1>                   
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card card-default">
-                    <div class="card-body">
-                        Who won?
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-default">
-                    <div class="card-header">
-                        <p id="user2">Waiting for Player 2</p>
-                    </div>
-                    <div class="card-body choices">
-                        <p class="rock">Rock</p>
-                        <p class="paper">Paper</p>
-                        <p class="scissors">Scissors</p>
-                    </div>
-                    <div>
-                        <p id="user2wl">Wins: Losses:</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-default">
-                    <div class="card-header">
-                        <h3 class="card-title">Chat Box</h3>
-                    </div>
-                    <div class="card-body" id="chat-box"></div>
+            <div class="row" id="name-input">
+                <div class="col-md-12">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="chat">
+                        <input type="text" class="form-control" placeholder="Name" id="username">
                         <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button" id="send">Send</button>
+                            <button class="btn btn-primary" type="button" id="start">Start</button>
                         </span>
                     </div>
                 </div>
             </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card card-default" id="player1">
+                        <div class="card-header">
+                            <p id="player1-name">Waiting for Player 1</p>
+                        </div>
+                        <div id="player1-chosen"></div>
+                        <ul>
+                        </ul>
+                        <div class="outcomes">
+                            <div class="outcome-trackers" id="player1-wins"></div>
+                            <div class="outcome-trackers" id="player1-losses"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-default">
+                        <div class="card-body">
+                            <div id="current-turn"></div>
+                            <div id="result"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-default" id="player2">
+                        <div class="card-header">
+                            <p id="player2-name">Waiting for Player 2</p>
+                        </div>
+                        <ul>
+                        </ul>
+                        <div id="player2-chosen"></div>
+                        <div class="outcomes">
+                            <div class="outcome-trackers" id="player2-wins"></div>
+                            <div class="outcome-trackers" id="player2-losses"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-default">
+                        <div class="card-header">
+                            <h3 class="card-title"><center>Chat Box</center></h3>
+                        </div>
+                        <div class="card-body" id="chat-bar"></div>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="chat-input">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button" id="chat-send">Send</button>
+                            </span>
+                        </div>
+                        <br>
+                        <div id="chat-messages"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
